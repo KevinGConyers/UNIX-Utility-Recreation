@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define BUFFER_SIZE 64
+
+int echoStandardIn();
+int simpleCat(const char *filename);
+int formatCat(const char *filename, int mode);
+
+
+int main(int argc, char* argv[]) {
+^Iif (argc > 1 && strcmp(argv[1], "-") != 0) {
+^I^IsimpleCat((const char*) argv[1]);^I
+^I}
+^Ielse {
+^I^IechoStandardIn();
+^I}
+^Ireturn 0;
+}
+
+
+int echoStandardIn() {
+^Ichar input[BUFFER_SIZE];
+^Iwhile(1) {
+^I^Ifgets(input, BUFFER_SIZE, stdin);
+^I^Iprintf("%s", input);
+^I}
+^Ireturn 0;
+}
+
+
+int simpleCat(const char * filename) {
+^IFILE *input_fp;
+^Ichar line_buffer[BUFFER_SIZE];
+^Ichar *stat;
+^Iconst int chars_to_read = BUFFER_SIZE;
+^Iinput_fp = fopen(filename, "r");
+^Iif (input_fp == NULL) {
+^I^Iprintf("Unable to open file: %s", filename);
+^I^Ireturn -127;
+^I}
+
+^Iwhile(1) {
+^I^Istat = fgets(line_buffer, chars_to_read, input_fp);
+^I^Iif (stat == NULL) {
+^I^I^Iif ( feof(input_fp) != 0) {
+^I^I^I^Ibreak;
+^I^I^I} else {
+^I^I^I^Iprintf("Unable to read from file: %s", filename);
+^I^I^I^Ireturn -126;
+^I^I^I}
+^I^I}
+^I^I^Ifputs(line_buffer, stdout);
+^I}
+
+^Ireturn 0;
+}
+
+int formatCat(const char * filename, int mode) {
+^IFILE *input_fp;
+^Ichar line_buffer[BUFFER_SIZE];
+^Ichar *stat;
+^Iconst int chars_to_read = BUFFER_SIZE;
+^Iinput_fp = fopen(filename, "r");
+^Iif (input_fp == NULL) {
+^I^Iprintf("Unable to open file: %s", filename);
+^I^Ireturn -127;
+^I}
+
+^Iwhile(1) {
+^I^Istat = fgets(line_buffer, chars_to_read, input_fp);
+^I^Iif (stat == NULL) {
+^I^I^Iif ( feof(input_fp) != 0) {
+^I^I^I^Ibreak;
+^I^I^I} else {
+^I^I^I^Iprintf("Unable to read from file: %s", filename);
+^I^I^I^Ireturn -126;
+^I^I^I}
+^I^I}
+^I^I^Ifputs(line_buffer, stdout);
+^I}
+
+^Ireturn 0;
+}

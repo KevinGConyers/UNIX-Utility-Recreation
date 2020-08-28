@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define BUFFER_SIZE 64
+
+int echoStandardIn();
+int simpleCat();
+
+
+int main(int argc, char* argv[]) {
+	if (argc > 1 && strcmp(argv[1], "-") != 0) {
+		simpleCat((const char*) argv[1]);	
+	}
+	else {
+		echoStandardIn();
+	}
+	return 0;
+}
+
+
+int echoStandardIn() {
+	char input[BUFFER_SIZE];
+	while(1) {
+		fgets(input, BUFFER_SIZE, stdin);
+		printf("%s", input);
+	}
+	return 0;
+}
+
+
+int simpleCat(const char * filename) {
+	FILE *input_fp;
+	char line_buffer[BUFFER_SIZE];
+	char *stat;
+	const int chars_to_read = BUFFER_SIZE;
+	input_fp = fopen(filename, "r");
+	if (input_fp == NULL) {
+		printf("Unable to open file: %s", filename);
+		return -127;
+	}
+
+	while(1) {
+		stat = fgets(line_buffer, chars_to_read, input_fp);
+		if (stat == NULL) {
+			if ( feof(input_fp) != 0) {
+				break;
+			} else {
+				printf("Unable to read from file: %s", filename);
+				return -126;
+			}
+		}
+			fputs(line_buffer, stdout);
+	}
+
+	return 0;
+}
