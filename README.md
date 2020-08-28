@@ -6,7 +6,8 @@ I am recreating them in no particular order (read: whatever seems easiest first)
 The way I am planning on going about this is pretty simple, I pick a utility, run 'man [utility]' and see if I can replicate the functionality myself.
 There are a few caveats, I am allowing myself to use system libraries, unless the functionality is interesting or novel (read: I passed university, I can
 write strcmp and I don't feel like doing that every project, an example of interesting functionality would be argument parsing). Also, I am going to do 
-my best to keep things in single modules instead of splitting them up into libraries, this is just so I can get really get a feel for <bd all </b> the 
+my best to keep things in single modules instead of splitting them up into
+libraries, this is just so I can get really get a feel for ** all **  the 
 moving parts of each utility (this is why I will be using system libraries for things like strcmp). Finally, everything will be compiled with clang, not GCC. I don't
 have any particular reason for this other than I like clang.
 
